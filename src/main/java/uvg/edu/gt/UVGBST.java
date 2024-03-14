@@ -122,22 +122,19 @@ public class UVGBST<E extends Comparable<E>> {
         return txt;
     }
 
-    public static void main(String [] args){
-        UVGBST <Association<String, String>> tree = new UVGBST<Association<String, String>>();
-
-        System.out.println(tree);
-
-        tree.add(new Association<String, String>("R", "nueve"));
-        System.out.println(tree);
-        tree.add(new Association<String, String>("R", "nine"));
-        System.out.println(tree);
-
-        tree.add(new Association<String, String>("T", "once"));
-        tree.add(new Association<String, String>("C", "cuatro"));
-        tree.add(new Association<String, String>("B", "uno"));
-        tree.add(new Association<String, String>("D", "seis"));
-
-        System.out.println(tree);
+    public void inOrderTraversal() {
+        inOrderTraversal(root);
     }
+
+    private void inOrderTraversal(Node<E> node) {
+        if (node != null) {
+            inOrderTraversal(node.leftChild); // Recorre el subárbol izquierdo
+            System.out.print(node.value + " "); // Visita el nodo actual
+            inOrderTraversal(node.rightChild); // Recorre el subárbol derecho
+        }
+    }
+
+
+
 
 }
