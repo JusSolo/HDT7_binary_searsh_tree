@@ -17,4 +17,12 @@ public class Association<K extends Comparable<K>, T> implements Comparable<Assoc
     public String toString(){
         return key.toString() + ":" + data.toString();
     }
+
+    public K getKey() {
+        return key;
+    }
+
+    public T getData() {
+        return data;
+    }
 }

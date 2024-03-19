@@ -66,14 +66,18 @@ public class UVGBST<E extends Comparable<E>> {
             return 1 + this.parent.nodeDepth();
         }
 
-        public Node<E> getNode(E key){
-            if (this.value.compareTo(key)==0){
+        public Node<E> getNode(E key) {
+            int compCase = key.compareTo(this.value);
+            if (compCase == 0) {
                 return this;
+            } else if (compCase < 0 && this.leftChild != null) {
+                return this.leftChild.getNode(key);
+            } else if (compCase > 0 && this.rightChild != null) {
+                return this.rightChild.getNode(key);
             }
-            // busque a la izquierda o a la derecha
-            // como se que lado buscar
             return null;
         }
+
     }
 
     private Node<E> root;
@@ -97,9 +101,12 @@ public class UVGBST<E extends Comparable<E>> {
         return this.root.nodeHeight();
     }
 
-    public E get(E key){
-
-        return null;
+    public E get(E key) {
+        if (root == null) {
+            return null;
+        }
+        Node<E> node = root.getNode(key);
+        return node != null ? node.value : null;
     }
 
     public String toString() {
@@ -129,7 +136,7 @@ public class UVGBST<E extends Comparable<E>> {
     private void inOrderTraversal(Node<E> node) {
         if (node != null) {
             inOrderTraversal(node.leftChild); // Recorre el subárbol izquierdo
-            System.out.print(node.value + " "); // Visita el nodo actual
+            System.out.print( "(" + node.value.toString() + ") "); // Visita el nodo actual
             inOrderTraversal(node.rightChild); // Recorre el subárbol derecho
         }
     }
